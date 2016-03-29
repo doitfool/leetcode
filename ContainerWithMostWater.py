@@ -24,7 +24,9 @@ class Solution(object):
 
         max_area = 0
         l, r = 0, len(height)-1
-        # l点高度小于r点高度，只有移动l才能找到更大的面积；同理，r点高度小于l点高度，只有移动r才能找到更大的面积
+        # l, r分别指向首尾，并向中间移动
+        # 补短：如果l的长度小于r，无论如何移动r，短板在l，不可能找到比当前记录的area更大的值了，只能通过移动l来找到新的可能的更大面积。
+        #       l点高度小于r点高度，只有移动l才能找到更大的面积；同理，r点高度小于l点高度，只有移动r才能找到更大的面积
         while l < r:
             area = min(height[l], height[r])*(r-l)
             if height[l] < height[r]:
