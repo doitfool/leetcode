@@ -29,7 +29,6 @@ class Solution(object):
             j += 1
             i += 1
 
-
 s = Solution()
 nums1, m, nums2, n = [1,1,3]+[0]*6, 3, [2,3,4,6,10], 5
 s.merge(nums1, m, nums2, n)
