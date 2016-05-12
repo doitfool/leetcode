@@ -11,7 +11,6 @@
         Related problem: Reverse Integer
 """
 
-
 class Solution(object):
     def reverseBits(self, n):
         """
