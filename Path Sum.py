@@ -26,14 +26,6 @@ class TreeNode(object):
         self.right = None
 
 class Solution(object):
-    def pathSum(self, root):
-        if root is None:
-            return 0
-        elif root.left is None and root.right is None:
-            return root.val
-        else:
-            return root.val+self.pathSum(root.left)
-
     def hasPathSum(self, root, sum):
         """
         :type root: TreeNode
@@ -42,22 +34,11 @@ class Solution(object):
         """
         if root is None:
             return False
-        flag = False
-        nodes, visited, s = [root], [], 0
-        while len(nodes) > 0:
-            node = nodes.pop(0)
-            visited.append(node)
-            s += node.val
-            if node.left is None and node.right is None:
-                if s == sum:
-                    flag = True
-                    break
-                else:
-                    visited
+        else:
+            if root.left is None and root.right is None and sum == root.val:
+                return True
             else:
-                pass
-        return flag
-
+                return self.hasPathSum(root.left, sum-root.val) or self.hasPathSum(root.right, sum-root.val)
 
 s = Solution()
 nodes = []
@@ -69,6 +50,5 @@ nodes.append(TreeNode(3))
 nodes[0].left = nodes[1]
 nodes[0].right = nodes[2]
 nodes[1].right = nodes[3]
-print s.pathSum(nodes[0])
-
+print s.hasPathSum(nodes[0], 2)
 
