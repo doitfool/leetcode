@@ -1,0 +1,95 @@
+import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) {
+        val = x;
+    }
+}
+public class BinaryTreeTraversal {
+    // 非递归先序遍历
+
+
+    // 递归先序遍历
+    public void preorderTraverse(TreeNode root, List<Integer> list){
+        if ( root==null ){
+            return;
+        }else{
+            list.add(root.val);
+            preorderTraverse(root.left, list);
+            preorderTraverse(root.right, list);
+        }
+    }
+    public List<Integer> preorderTraversalRec(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        preorderTraverse(root, list);
+        return list;
+    }
+
+
+    // 非递归中序遍历
+    public List<Integer> inorderTraversal(TreeNode root) {
+        if ( root==null ){
+            return null;
+        }else{
+            TreeNode tmp = root;
+            Stack<TreeNode> stack = new Stack<>();
+            Set<TreeNode> visitedNode = new HashSet<>();
+            List<Integer> list = new ArrayList<>();
+            stack.push(tmp);
+            visitedNode.add(tmp);
+            while ( !stack.isEmpty() ) {
+                tmp = stack.peek();
+                while ( !visitedNode.contains(tmp.left) && tmp.left != null) {
+                    stack.push(tmp.left);
+                    visitedNode.add(tmp.left);
+                    tmp = tmp.left;
+                }
+                tmp = stack.pop();
+                list.add(tmp.val);
+                if ( !visitedNode.contains(tmp.right) && tmp.right != null ){
+                    stack.push(tmp.right);
+                    visitedNode.add(tmp.right);
+                }
+            }
+            return list;
+        }
+    }
+
+    // 递归中序遍历
+    public void inorderTraverse(TreeNode root, List<Integer> list){
+        if ( root==null ){
+            return;
+        }else{
+            inorderTraverse(root.left, list);
+            list.add(root.val);
+            inorderTraverse(root.right, list);
+        }
+    }
+    public List<Integer> inorderTraversalRec(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        inorderTraverse(root, list);
+        return list;
+    }
+
+    // 非递归后序遍历
+
+    // 递归后序遍历
+    public void postorderTraverse(TreeNode root, List<Integer> list){
+        if ( root==null ){
+            return;
+        }else{
+            postorderTraverse(root.left, list);
+            postorderTraverse(root.right, list);
+            list.add(root.val);
+
+        }
+    }
+    public List<Integer> postorderTraversalRec(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        postorderTraverse(root, list);
+        return list;
+    }
+}
